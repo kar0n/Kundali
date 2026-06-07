@@ -1,0 +1,22 @@
+# Virtual Environments
+*env/
+*ENV/
+.venv/
+venv/
+
+# Python Compilation Artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Node.js
+node_modules/
+dist/
+.env
+
+# Application Configuration & System Level
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

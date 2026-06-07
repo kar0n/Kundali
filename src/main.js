@@ -1,0 +1,83 @@
+import { initEphemeris, dateToJulianDay } from './astro/swisseph-init.js';
+import { calculatePlanets } from './astro/planets.js';
+import { calculateAscendant, mapToHouses } from './astro/ascendant.js';
+import { generateD9Chart } from './astro/navamsha.js';
+import { calculateDasha } from './astro/dasha.js';
+import { renderRashiChart } from './charts/rashi-chart.js';
+import { renderNavamshaChart } from './charts/navamsha-chart.js';
+import { renderPlanetTable } from './ui/planet-table.js';
+import { renderDashaTimeline } from './dasha/dasha-display.js';
+
+let swe = null;
+
+// Initialize WASM on load
+window.addEventListener('DOMContentLoaded', async () => {
+  try {
+    swe = await initEphemeris();
+    console.log("Swiss Ephemeris loaded successfully");
+  } catch (err) {
+    console.error("Failed to load Swiss Ephemeris:", err);
+    alert("There was an error loading the astrology engine. Please try refreshing.");
+  }
+});
+
+document.getElementById('birth-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  
+  if (!swe) {
+    alert("Astrology engine is still loading. Please wait a moment and try again.");
+    return;
+  }
+  
+  const date = document.getElementById('date').value;
+  const time = document.getElementById('time').value;
+  const lat = parseFloat(document.getElementById('lat').value);
+  const lng = parseFloat(document.getElementById('lng').value);
+  const tz = parseFloat(document.getElementById('tz').value);
+  
+  // Show Loading
+  document.getElementById('loading').classList.remove('hidden');
+  document.getElementById('results').classList.add('hidden');
+  
+  try {
+    // 1. Calculate Julian Day
+    const jd = dateToJulianDay(date, time, tz);
+    
+    // 2. Ascendant (Lagna)
+    const ascendant = calculateAscendant(swe, jd, lat, lng);
+    
+    // 3. Planets
+    let planets = calculatePlanets(swe, jd);
+    
+    // 4. Map to D1 Houses
+    planets = mapToHouses(planets, ascendant.signIndex);
+    
+    // 5. Navamsha (D9) Chart
+    const { d9Planets, d9AscendantSignIndex } = generateD9Chart(planets, ascendant.longitude);
+    
+    // 6. Vimshottari Dasha
+    const birthDateObj = new Date(`${date}T${time}:00`);
+    // Adjust birthDateObj to local time accounting for the user's input timezone
+    // The browser might assume local TZ, so we need to be careful if we want accurate Dasha dates.
+    // For simplicity, we just use local browser timezone for displaying dates in this demo.
+    const dasha = calculateDasha(planets.MOON.longitude, birthDateObj);
+    
+    // Render UI
+    renderRashiChart('d1-chart', planets, ascendant.signIndex);
+    renderNavamshaChart('d9-chart', d9Planets, d9AscendantSignIndex);
+    renderPlanetTable('planet-table-section', planets, ascendant);
+    renderDashaTimeline('dasha-balance', 'dasha-timeline', dasha);
+    
+    // Hide Loading, Show Results
+    document.getElementById('loading').classList.add('hidden');
+    document.getElementById('results').classList.remove('hidden');
+    
+    // Scroll to results
+    document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+    
+  } catch (err) {
+    console.error("Calculation Error:", err);
+    alert("Error calculating charts. Please check the console for details.");
+    document.getElementById('loading').classList.add('hidden');
+  }
+});
