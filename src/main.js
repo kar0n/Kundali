@@ -14,14 +14,20 @@ async function initializeApp() {
   const daySelect = document.getElementById('dob-day');
   for (let i = 1; i <= 31; i++) {
     const val = i.toString().padStart(2, '0');
-    daySelect.innerHTML += `<option value="${val}">${val}</option>`;
+    const opt = document.createElement('option');
+    opt.value = val;
+    opt.textContent = val;
+    daySelect.appendChild(opt);
   }
   
   // Populate Year Dropdown (1900 to current year)
   const yearSelect = document.getElementById('dob-year');
   const currentYear = new Date().getFullYear();
   for (let i = currentYear; i >= 1900; i--) {
-    yearSelect.innerHTML += `<option value="${i}">${i}</option>`;
+    const opt = document.createElement('option');
+    opt.value = i.toString();
+    opt.textContent = i.toString();
+    yearSelect.appendChild(opt);
   }
 
   try {
