@@ -1,12 +1,12 @@
 :root {
-  --bg-color: #0a0a0f;
-  --surface-color: rgba(255, 255, 255, 0.05);
-  --surface-border: rgba(255, 255, 255, 0.1);
-  --text-primary: #f0f0f5;
-  --text-secondary: #9aa0a6;
-  --accent-gold: #d4a843;
-  --accent-purple: #4c2b9a;
-  --error: #ff6b6b;
+  --bg-color: #fafafc;
+  --surface-color: rgba(255, 255, 255, 0.9);
+  --surface-border: rgba(0, 0, 0, 0.08);
+  --text-primary: #1f2937;
+  --text-secondary: #4b5563;
+  --accent-gold: #c2410c; /* A deep saffron/orange for light theme */
+  --accent-purple: #1e3a8a; /* Deep elegant navy */
+  --error: #dc2626;
 }
 
 * {
@@ -21,8 +21,8 @@ body {
   color: var(--text-primary);
   line-height: 1.6;
   background-image: 
-    radial-gradient(circle at 15% 50%, rgba(76, 43, 154, 0.15), transparent 25%),
-    radial-gradient(circle at 85% 30%, rgba(212, 168, 67, 0.1), transparent 25%);
+    radial-gradient(circle at 15% 50%, rgba(30, 58, 138, 0.05), transparent 25%),
+    radial-gradient(circle at 85% 30%, rgba(194, 65, 12, 0.05), transparent 25%);
   background-attachment: fixed;
   min-height: 100vh;
 }
@@ -46,7 +46,7 @@ h1, h2, h3, h4 {
 
 .hero h1 {
   font-size: 3rem;
-  background: linear-gradient(to right, #fff, var(--accent-gold));
+  background: linear-gradient(to right, var(--accent-purple), var(--accent-gold));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 0.5rem;
@@ -65,7 +65,7 @@ h1, h2, h3, h4 {
   border-radius: 16px;
   padding: 2rem;
   margin-bottom: 2rem;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);
 }
 
 .form-group {
@@ -91,24 +91,26 @@ label {
 input {
   width: 100%;
   padding: 0.75rem 1rem;
-  background: rgba(0, 0, 0, 0.2);
+  background: #ffffff;
   border: 1px solid var(--surface-border);
   border-radius: 8px;
-  color: #fff;
+  color: var(--text-primary);
   font-family: 'Inter', sans-serif;
   transition: all 0.2s ease;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
 }
 
 input:focus {
   outline: none;
-  border-color: var(--accent-gold);
-  background: rgba(0, 0, 0, 0.4);
+  border-color: var(--accent-purple);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
 }
 
 input[type="date"]::-webkit-calendar-picker-indicator,
 input[type="time"]::-webkit-calendar-picker-indicator {
-  filter: invert(1);
   cursor: pointer;
+  filter: none;
 }
 
 small {
@@ -191,7 +193,7 @@ th {
 }
 
 .dasha-maha {
-  background: rgba(0,0,0,0.2);
+  background: #ffffff;
   border: 1px solid var(--surface-border);
   border-radius: 8px;
   overflow: hidden;
@@ -208,7 +210,7 @@ th {
 }
 
 .dasha-maha summary:hover {
-  background: rgba(255,255,255,0.05);
+  background: rgba(0,0,0,0.02);
 }
 
 .dasha-antardashas {
@@ -219,7 +221,7 @@ th {
   display: flex;
   justify-content: space-between;
   padding: 0.75rem 1rem;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(0,0,0,0.05);
   font-size: 0.95rem;
   color: var(--text-secondary);
 }
@@ -229,7 +231,7 @@ th {
 }
 
 .dasha-lord {
-  color: #fff;
+  color: var(--text-primary);
 }
 
 .spinner {

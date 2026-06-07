@@ -8,14 +8,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <link rel="stylesheet" href="/src/styles/main.css">
   </head>
   <body>
     <div id="app">
       <header class="hero">
         <div class="stars"></div>
-        <h1>Cosmic Blueprint</h1>
-        <p>Precision Vedic Astrology & Kundali Generator</p>
+        <h1>Precision Vedic Kundali</h1>
+        <p>Premium Jyotish Astrology Calculator</p>
       </header>
       
       <main class="container">
@@ -39,22 +41,10 @@
               </div>
             </div>
             
-            <div class="form-row">
-              <div class="form-group">
-                <label for="lat">Latitude (Decimal)</label>
-                <input type="number" step="any" id="lat" placeholder="e.g. 28.6139" required>
-                <small>Positive for North, Negative for South</small>
-              </div>
-              <div class="form-group">
-                <label for="lng">Longitude (Decimal)</label>
-                <input type="number" step="any" id="lng" placeholder="e.g. 77.2090" required>
-                <small>Positive for East, Negative for West</small>
-              </div>
-            </div>
-            
             <div class="form-group">
-              <label for="tz">Timezone Offset (Hours from UTC)</label>
-              <input type="number" step="0.5" id="tz" placeholder="e.g. 5.5 for IST" required>
+              <label for="city">City of Birth</label>
+              <input type="text" id="city" placeholder="e.g. Mumbai, India" required>
+              <small>Coordinates will be calculated automatically.</small>
             </div>
             
             <button type="submit" id="generate-btn" class="primary-btn">Generate Kundali</button>

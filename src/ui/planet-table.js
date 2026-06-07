@@ -3,7 +3,7 @@ export function renderPlanetTable(containerId, planets, ascendant) {
   if (!tbody) return;
   
   let html = `
-    <tr style="background: rgba(255,255,255,0.05);">
+    <tr style="background: rgba(0,0,0,0.05);">
       <td><strong>Ascendant</strong></td>
       <td>${ascendant.signName}</td>
       <td>${formatDegree(ascendant.degreeInSign)}</td>

@@ -32,14 +32,14 @@ export function generateChartSVG(planetsData, ascendantSignIndex, chartType = 'D
   let svg = `
     <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
       <style>
-        .line { stroke: rgba(255,255,255,0.2); stroke-width: 2; fill: none; }
-        .text { fill: rgba(255,255,255,0.9); font-family: 'Outfit', sans-serif; font-size: 14px; text-anchor: middle; font-weight: 600; }
-        .sign-num { fill: rgba(255,255,255,0.4); font-size: 12px; }
-        .vargottama { fill: #d4a843; font-size: 16px; }
+        .line { stroke: rgba(30, 58, 138, 0.4); stroke-width: 2; fill: none; }
+        .text { fill: rgba(31, 41, 55, 0.9); font-family: 'Outfit', sans-serif; font-size: 14px; text-anchor: middle; font-weight: 600; }
+        .sign-num { fill: rgba(31, 41, 55, 0.4); font-size: 12px; }
+        .vargottama { fill: #c2410c; font-size: 16px; }
       </style>
       
       <!-- Box and Diagonals -->
-      <rect x="0" y="0" width="400" height="400" class="line" fill="rgba(10, 10, 15, 0.5)"/>
+      <rect x="0" y="0" width="400" height="400" class="line" fill="#ffffff"/>
       <line x1="0" y1="0" x2="400" y2="400" class="line"/>
       <line x1="400" y1="0" x2="0" y2="400" class="line"/>
       <line x1="200" y1="0" x2="400" y2="200" class="line"/>

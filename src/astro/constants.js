@@ -14,15 +14,15 @@ export const SIGNS = [
 ];
 
 export const PLANETS = {
-  SUN: { id: 0, name: 'Sun', abbr: 'Su', color: '#ffb347' },
-  MOON: { id: 1, name: 'Moon', abbr: 'Mo', color: '#c9c9ff' },
-  MERCURY: { id: 2, name: 'Mercury', abbr: 'Me', color: '#77dd77' },
-  VENUS: { id: 3, name: 'Venus', abbr: 'Ve', color: '#fdfd96' },
-  MARS: { id: 4, name: 'Mars', abbr: 'Ma', color: '#ff6961' },
-  JUPITER: { id: 5, name: 'Jupiter', abbr: 'Ju', color: '#f8d66d' },
-  SATURN: { id: 6, name: 'Saturn', abbr: 'Sa', color: '#84b6f4' },
-  RAHU: { id: 10, name: 'Rahu', abbr: 'Ra', color: '#a0785a' },
-  KETU: { id: 11, name: 'Ketu', abbr: 'Ke', color: '#9e9e9e' }
+  SUN: { id: 0, name: 'Sun', abbr: 'Su', color: '#c2410c' },
+  MOON: { id: 1, name: 'Moon', abbr: 'Mo', color: '#1e3a8a' },
+  MERCURY: { id: 2, name: 'Mercury', abbr: 'Me', color: '#15803d' },
+  VENUS: { id: 3, name: 'Venus', abbr: 'Ve', color: '#8b5cf6' },
+  MARS: { id: 4, name: 'Mars', abbr: 'Ma', color: '#b91c1c' },
+  JUPITER: { id: 5, name: 'Jupiter', abbr: 'Ju', color: '#b45309' },
+  SATURN: { id: 6, name: 'Saturn', abbr: 'Sa', color: '#1d4ed8' },
+  RAHU: { id: 10, name: 'Rahu', abbr: 'Ra', color: '#57534e' },
+  KETU: { id: 11, name: 'Ketu', abbr: 'Ke', color: '#52525b' }
 };
 
 export const NAKSHATRAS = [

@@ -10,8 +10,14 @@ import { renderDashaTimeline } from './dasha/dasha-display.js';
 
 let swe = null;
 
-// Initialize WASM on load
+// Initialize WASM and Datepicker on load
 window.addEventListener('DOMContentLoaded', async () => {
+  // Initialize flatpickr with year dropdown
+  flatpickr("#date", {
+    dateFormat: "Y-m-d",
+    allowInput: true
+  });
+
   try {
     swe = await initEphemeris();
     console.log("Swiss Ephemeris loaded successfully");
@@ -31,15 +37,29 @@ document.getElementById('birth-form').addEventListener('submit', async (e) => {
   
   const date = document.getElementById('date').value;
   const time = document.getElementById('time').value;
-  const lat = parseFloat(document.getElementById('lat').value);
-  const lng = parseFloat(document.getElementById('lng').value);
-  const tz = parseFloat(document.getElementById('tz').value);
+  const cityName = document.getElementById('city').value;
+  
+  // Hardcode Timezone to Indian Standard Time (IST)
+  const tz = 5.5; 
   
   // Show Loading
   document.getElementById('loading').classList.remove('hidden');
   document.getElementById('results').classList.add('hidden');
   
   try {
+    // Geocode City Name via Nominatim
+    const geocodeRes = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(cityName)}&limit=1`);
+    const geocodeData = await geocodeRes.json();
+    
+    if (!geocodeData || geocodeData.length === 0) {
+      alert("City not found. Please enter a valid city name (e.g. 'Mumbai, India').");
+      document.getElementById('loading').classList.add('hidden');
+      return;
+    }
+    
+    const lat = parseFloat(geocodeData[0].lat);
+    const lng = parseFloat(geocodeData[0].lon);
+
     // 1. Calculate Julian Day
     const jd = dateToJulianDay(date, time, tz);
     
