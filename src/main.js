@@ -7,10 +7,23 @@ import { renderRashiChart } from './charts/rashi-chart.js';
 import { renderNavamshaChart } from './charts/navamsha-chart.js';
 import { renderPlanetTable } from './ui/planet-table.js';
 import { renderDashaTimeline } from './dasha/dasha-display.js';
-
 let swe = null;
 
 async function initializeApp() {
+  // Populate Day Dropdown
+  const daySelect = document.getElementById('dob-day');
+  for (let i = 1; i <= 31; i++) {
+    const val = i.toString().padStart(2, '0');
+    daySelect.innerHTML += `<option value="${val}">${val}</option>`;
+  }
+  
+  // Populate Year Dropdown (1900 to current year)
+  const yearSelect = document.getElementById('dob-year');
+  const currentYear = new Date().getFullYear();
+  for (let i = currentYear; i >= 1900; i--) {
+    yearSelect.innerHTML += `<option value="${i}">${i}</option>`;
+  }
+
   try {
     swe = await initEphemeris();
     console.log("Swiss Ephemeris loaded successfully");
@@ -35,7 +48,11 @@ document.getElementById('birth-form').addEventListener('submit', async (e) => {
     return;
   }
   
-  const date = document.getElementById('date').value;
+  const dd = document.getElementById('dob-day').value;
+  const mm = document.getElementById('dob-month').value;
+  const yy = document.getElementById('dob-year').value;
+  const date = `${yy}-${mm}-${dd}`;
+  
   const time = document.getElementById('time').value;
   const cityName = document.getElementById('city').value;
   
