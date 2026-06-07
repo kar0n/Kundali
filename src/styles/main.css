@@ -60,14 +60,14 @@ h1, h2, h3, h4 {
 }
 
 .glass-card {
-  background: var(--surface-color);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid var(--surface-border);
+  background: rgba(240, 242, 245, 0.95);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(30, 58, 138, 0.1);
   border-radius: 16px;
   padding: 2rem;
   margin-bottom: 2rem;
-  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 .form-group {

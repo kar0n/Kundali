@@ -10,8 +10,7 @@ import { renderDashaTimeline } from './dasha/dasha-display.js';
 
 let swe = null;
 
-// Initialize WASM and Datepicker on load
-window.addEventListener('DOMContentLoaded', async () => {
+async function initializeApp() {
   // Initialize flatpickr with year dropdown
   flatpickr("#date", {
     dateFormat: "Y-m-d",
@@ -27,7 +26,14 @@ window.addEventListener('DOMContentLoaded', async () => {
     console.error("Failed to load Swiss Ephemeris:", err);
     alert("There was an error loading the astrology engine. Please try refreshing.");
   }
-});
+}
+
+// Ensure init runs regardless of when module is executed
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initializeApp);
+} else {
+  initializeApp();
+}
 
 document.getElementById('birth-form').addEventListener('submit', async (e) => {
   e.preventDefault();
