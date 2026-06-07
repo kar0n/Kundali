@@ -11,13 +11,6 @@ import { renderDashaTimeline } from './dasha/dasha-display.js';
 let swe = null;
 
 async function initializeApp() {
-  // Initialize flatpickr with year dropdown
-  window.flatpickr("#date", {
-    dateFormat: "Y-m-d",
-    allowInput: true,
-    disableMobile: "true" // Ensures native date pickers don't override on mobile/Safari
-  });
-
   try {
     swe = await initEphemeris();
     console.log("Swiss Ephemeris loaded successfully");
