@@ -12,11 +12,10 @@ let swe = null;
 
 async function initializeApp() {
   // Initialize flatpickr with year dropdown
-  flatpickr("#date", {
+  window.flatpickr("#date", {
     dateFormat: "Y-m-d",
-    altInput: true,
-    altFormat: "F j, Y",
-    allowInput: true
+    allowInput: true,
+    disableMobile: "true" // Ensures native date pickers don't override on mobile/Safari
   });
 
   try {
