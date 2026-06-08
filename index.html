@@ -81,7 +81,7 @@
                 </label>
                 <div class="input-with-icon">
                   <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  <input type="time" id="tob-input" required style="cursor: pointer;">
+                  <input type="text" id="tob-input" placeholder="Select Time of Birth" required autocomplete="off" style="cursor: pointer;">
                 </div>
               </div>
             </div>
@@ -235,6 +235,14 @@
             var select = instance.currentYearElement.parentNode.querySelector('select');
             if(select) select.value = instance.currentYear;
           }
+        });
+
+        // ── Initialize Flatpickr Time Picker ──
+        flatpickr("#tob-input", {
+          enableTime: true,
+          noCalendar: true,
+          dateFormat: "h:i K",
+          minuteIncrement: 1
         });
 
         // ── Form submit handler ──

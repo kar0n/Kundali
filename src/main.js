@@ -26,13 +26,31 @@ window.__generateKundali = async function () {
   }
   const date = dateVal;
 
-  // ── Read Time (Native Time Input) ──
-  const tob = document.getElementById('tob-input').value; // format: "HH:MM" (24-hour)
+  // ── Read Time (Flatpickr 12-hour input) ──
+  const tob = document.getElementById('tob-input').value; // format: "02:30 PM"
   if (!tob) {
     alert('Please select your time of birth.');
     return;
   }
-  const [hourVal, minVal] = tob.split(':');
+  
+  let hourVal, minVal;
+  if (tob.includes('AM') || tob.includes('PM')) {
+    const parts = tob.split(' ');
+    const timeParts = parts[0].split(':');
+    hourVal = timeParts[0];
+    minVal = timeParts[1];
+    const period = parts[1];
+    
+    let hour24 = parseInt(hourVal, 10);
+    if (period === 'AM' && hour24 === 12) hour24 = 0;
+    if (period === 'PM' && hour24 !== 12) hour24 += 12;
+    hourVal = hour24.toString().padStart(2, '0');
+  } else {
+    // Fallback if it's somehow in 24-hour format
+    const parts = tob.split(':');
+    hourVal = parts[0];
+    minVal = parts[1];
+  }
   
   const time = `${hourVal}:${minVal}`;
 
