@@ -1,4 +1,4 @@
-import swisseph from '@swisseph/browser';
+import { SwissEphemeris } from '@swisseph/browser';
 
 let sweInstance = null;
 
@@ -6,14 +6,18 @@ export async function initEphemeris() {
   if (sweInstance) return sweInstance;
   
   // Create instance and initialize
-  sweInstance = new swisseph.SwissEphemeris();
+  sweInstance = new SwissEphemeris();
   await sweInstance.init();
   
-  // Set Ayanamsha to Lahiri (Chitrapaksha)
-  // SE_SIDM_LAHIRI = 1
-  sweInstance.setSiderealMode(1, 0, 0);
-  
   return sweInstance;
+}
+
+export function calculateLahiriAyanamsha(jd) {
+  const T = (jd - 2451545.0) / 36525.0;
+  // Precise precession formula for Lahiri Ayanamsha (IAU 1976 model):
+  // At J2000.0 (T = 0), Lahiri Ayanamsha was 23° 51' 25.532" = 23.85709222 degrees.
+  const precession = (5029.0966 * T + 1.11161 * T * T - 0.000113 * T * T * T) / 3600.0;
+  return 23.85709222 + precession;
 }
 
 export function dateToJulianDay(dateStr, timeStr, tzOffsetHours) {

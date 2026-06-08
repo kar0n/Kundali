@@ -1,4 +1,5 @@
 import { SIGNS } from './constants.js';
+import { calculateLahiriAyanamsha } from './swisseph-init.js';
 
 export function calculateAscendant(swe, jd, lat, lng) {
   // swe.calculateHouses(jd, lat, lng, houseSystemFlag)
@@ -6,18 +7,17 @@ export function calculateAscendant(swe, jd, lat, lng) {
   
   // Actually, we'll calculate Placidus or just use Ascendant degree.
   // In Whole Sign, the 1st house is the entire sign the Ascendant falls into.
-  const eps = swe.calculatePosition(jd, -1 /* SE_ECL_NUT */, 2); // Get true obliquity
-  
   const houseData = swe.calculateHouses(jd, lat, lng, 'P');
+  const ayanamsha = calculateLahiriAyanamsha(jd);
   
   // Ascendant is usually the first item in the houses array or specifically returned
-  const ascendantLongitude = houseData.ascendant;
+  const siderealAscendant = (houseData.ascendant - ayanamsha + 360) % 360;
   
-  const signIndex = Math.floor(ascendantLongitude / 30);
-  const degreeInSign = ascendantLongitude % 30;
+  const signIndex = Math.floor(siderealAscendant / 30);
+  const degreeInSign = siderealAscendant % 30;
   
   return {
-    longitude: ascendantLongitude,
+    longitude: siderealAscendant,
     signIndex,
     signName: SIGNS[signIndex].name,
     signSanskrit: SIGNS[signIndex].sanskrit,

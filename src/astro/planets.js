@@ -1,11 +1,11 @@
 import { PLANETS, SIGNS, NAKSHATRAS } from './constants.js';
+import { calculateLahiriAyanamsha } from './swisseph-init.js';
 
 // Calculate positions for all planets
 export function calculatePlanets(swe, jd) {
-  // SWISSEPH Calculation Flags
-  // SEFLG_SWIEPH (2) + SEFLG_SPEED (256) + SEFLG_SIDEREAL (64 * 1024)
-  const flags = 2 | 256 | 65536; 
-  
+  // Use MoshierEphemeris (4) + Speed (256) for offline client-side calculation
+  const flags = 4 | 256; 
+  const ayanamsha = calculateLahiriAyanamsha(jd);
   const results = {};
   
   for (const [key, planetInfo] of Object.entries(PLANETS)) {
@@ -25,8 +25,8 @@ export function calculatePlanets(swe, jd) {
       pos = swe.calculatePosition(jd, swePlanetId, flags);
     }
     
-    // Process longitude into Rashi, degrees, Nakshatra
-    const longitude = pos.longitude;
+    // Process longitude into Rashi, degrees, Nakshatra (Vedic sidereal)
+    const longitude = (pos.longitude - ayanamsha + 360) % 360;
     const isRetrograde = pos.longitudeSpeed < 0;
     
     // Sign calculations
