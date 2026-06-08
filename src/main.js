@@ -7,6 +7,7 @@ import { renderRashiChart } from './charts/rashi-chart.js';
 import { renderNavamshaChart } from './charts/navamsha-chart.js';
 import { renderPlanetTable } from './ui/planet-table.js';
 import { renderDashaTimeline } from './dasha/dasha-display.js';
+import { renderInterpretation } from './ui/interpretation.js';
 
 // ── Generate Kundali handler ──
 // Exposed as a global so the inline script's form handler can call it
@@ -96,6 +97,7 @@ window.__generateKundali = async function () {
     // Render UI
     renderRashiChart('d1-chart', planets, ascendant.signIndex);
     renderNavamshaChart('d9-chart', d9Planets, d9AscendantSignIndex);
+    renderInterpretation('interpretation-section', planets, ascendant, dasha);
     renderPlanetTable('planet-table-section', planets, ascendant);
     renderDashaTimeline('dasha-balance', 'dasha-timeline', dasha);
 
