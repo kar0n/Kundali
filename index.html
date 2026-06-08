@@ -75,13 +75,21 @@
               </div>
 
               <div class="form-group form-group-wide">
-                <label for="tob-input">
+                <label>
                   <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                   Time of Birth
                 </label>
-                <div class="input-with-icon">
-                  <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                  <input type="text" id="tob-input" placeholder="Select Time of Birth" required autocomplete="off" style="cursor: pointer;">
+                <div class="select-row">
+                  <select id="tob-hour" required>
+                    <option value="" disabled selected>Hour</option>
+                  </select>
+                  <select id="tob-minute" required>
+                    <option value="" disabled selected>Min</option>
+                  </select>
+                  <select id="tob-period">
+                    <option value="AM">AM</option>
+                    <option value="PM">PM</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -208,7 +216,8 @@
             
             var currentYear = new Date().getFullYear();
             // Start default selected at 1995 if no date is set, otherwise use current year
-            for (var y = currentYear; y >= 1950; y--) {
+            // Populate options from 1950 up to currentYear (ascending)
+            for (var y = 1950; y <= currentYear; y++) {
               var option = document.createElement('option');
               option.value = y;
               option.textContent = y;
@@ -237,13 +246,25 @@
           }
         });
 
-        // ── Initialize Flatpickr Time Picker ──
-        flatpickr("#tob-input", {
-          enableTime: true,
-          noCalendar: true,
-          dateFormat: "h:i K",
-          minuteIncrement: 1
-        });
+        // ── Hour (1–12) ──
+        var hourSelect = document.getElementById('tob-hour');
+        for (var h = 1; h <= 12; h++) {
+          var opt = document.createElement('option');
+          var val = h < 10 ? '0' + h : '' + h;
+          opt.value = val;
+          opt.textContent = val;
+          hourSelect.appendChild(opt);
+        }
+
+        // ── Minute (00–59) ──
+        var minSelect = document.getElementById('tob-minute');
+        for (var m = 0; m <= 59; m++) {
+          var opt = document.createElement('option');
+          var val = m < 10 ? '0' + m : '' + m;
+          opt.value = val;
+          opt.textContent = val;
+          minSelect.appendChild(opt);
+        }
 
         // ── Form submit handler ──
         // The module script will set window.__generateKundali when it loads.
