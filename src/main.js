@@ -26,20 +26,15 @@ window.__generateKundali = async function () {
   }
   const date = dateVal;
 
-  // ── Read Time (12-hour → 24-hour) ──
-  const hourVal = document.getElementById('tob-hour').value;
-  const minuteVal = document.getElementById('tob-minute').value;
-  const period = document.getElementById('tob-period').value;
-
-  if (!hourVal || !minuteVal) {
+  // ── Read Time (Native Time Input) ──
+  const tob = document.getElementById('tob-input').value; // format: "HH:MM" (24-hour)
+  if (!tob) {
     alert('Please select your time of birth.');
     return;
   }
-
-  let hour24 = parseInt(hourVal, 10);
-  if (period === 'AM' && hour24 === 12) hour24 = 0;
-  if (period === 'PM' && hour24 !== 12) hour24 += 12;
-  const time = `${hour24.toString().padStart(2, '0')}:${minuteVal}`;
+  const [hourVal, minVal] = tob.split(':');
+  
+  const time = `${hourVal}:${minVal}`;
 
   // ── Read City ──
   const cityName = document.getElementById('city').value.trim();
