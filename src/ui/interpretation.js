@@ -25,53 +25,68 @@ export function renderInterpretation(containerId, planets, ascendant, dasha) {
     <h3>Astrological Reading</h3>
     <div class="interpretation-grid">
       <div class="interp-card">
-        <h4><span class="interp-icon">🌅</span> Ascendant (Lagna)</h4>
-        <details class="interp-guide interp-guide-small">
-          <summary><strong>What it represents</strong></summary>
-          <div class="guide-content">
-            <p style="margin:0;font-size:0.9rem;color:var(--text-medium)">The Ascendant is the zodiac sign that was rising on the eastern horizon when you were born. It represents your outward personality, physical appearance, and how you interact with the world.</p>
-          </div>
-        </details>
+        <h4><span class="interp-icon">🌅</span> Ascendant (Lagna)
+          <details class="info-popover">
+            <summary title="What it represents">
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            </summary>
+            <div class="popover-content">
+              <p>The Ascendant is the zodiac sign that was rising on the eastern horizon when you were born. It represents your outward personality, physical appearance, and how you interact with the world.</p>
+            </div>
+          </details>
+        </h4>
         <p>${ascendantText}</p>
       </div>
       <div class="interp-card">
-        <h4><span class="interp-icon">☀️</span> Sun (Surya)</h4>
-        <details class="interp-guide interp-guide-small">
-          <summary><strong>What it represents</strong></summary>
-          <div class="guide-content">
-            <p style="margin:0;font-size:0.9rem;color:var(--text-medium)">The Sun represents your ego, core identity, and soul purpose. It dictates where you seek to shine, your natural authority, and your vitality.</p>
-          </div>
-        </details>
+        <h4><span class="interp-icon">☀️</span> Sun (Surya)
+          <details class="info-popover">
+            <summary title="What it represents">
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            </summary>
+            <div class="popover-content">
+              <p>The Sun represents your ego, core identity, and soul purpose. It dictates where you seek to shine, your natural authority, and your vitality.</p>
+            </div>
+          </details>
+        </h4>
         <p>${sunText}</p>
       </div>
       <div class="interp-card">
-        <h4><span class="interp-icon">🌙</span> Moon (Chandra)</h4>
-        <details class="interp-guide interp-guide-small">
-          <summary><strong>What it represents</strong></summary>
-          <div class="guide-content">
-            <p style="margin:0;font-size:0.9rem;color:var(--text-medium)">The Moon represents your mind, emotions, and how you process the world internally. It dictates your emotional needs, intuition, and your deepest psychological nature.</p>
-          </div>
-        </details>
+        <h4><span class="interp-icon">🌙</span> Moon (Chandra)
+          <details class="info-popover">
+            <summary title="What it represents">
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            </summary>
+            <div class="popover-content">
+              <p>The Moon represents your mind, emotions, and how you process the world internally. It dictates your emotional needs, intuition, and your deepest psychological nature.</p>
+            </div>
+          </details>
+        </h4>
         <p>${moonText}</p>
       </div>
       <div class="interp-card">
-        <h4><span class="interp-icon">✨</span> Moon's Nakshatra</h4>
-        <details class="interp-guide interp-guide-small">
-          <summary><strong>What it represents</strong></summary>
-          <div class="guide-content">
-            <p style="margin:0;font-size:0.9rem;color:var(--text-medium)">Nakshatras are the 27 lunar mansions. The Nakshatra your Moon was in at birth provides extremely specific insights into your mind's true nature and triggers your Dasha timeline.</p>
-          </div>
-        </details>
+        <h4><span class="interp-icon">✨</span> Moon's Nakshatra
+          <details class="info-popover">
+            <summary title="What it represents">
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            </summary>
+            <div class="popover-content">
+              <p>Nakshatras are the 27 lunar mansions. The Nakshatra your Moon was in at birth provides extremely specific insights into your mind's true nature and triggers your Dasha timeline.</p>
+            </div>
+          </details>
+        </h4>
         <p><strong>${NAKSHATRAS[planets.MOON.nakshatraIndex]}</strong> - ${nakshatraText}</p>
       </div>
       <div class="interp-card" style="grid-column: 1 / -1;">
-        <h4><span class="interp-icon">⏳</span> Current Phase (Mahadasha)</h4>
-        <details class="interp-guide interp-guide-small">
-          <summary><strong>What it represents</strong></summary>
-          <div class="guide-content">
-            <p style="margin:0;font-size:0.9rem;color:var(--text-medium)">Vimshottari Dasha is a timeline of planetary periods. The active Mahadasha (major period) determines the overarching themes, focus, and energy of this phase of your life.</p>
-          </div>
-        </details>
+        <h4><span class="interp-icon">⏳</span> Current Phase (Mahadasha)
+          <details class="info-popover">
+            <summary title="What it represents">
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            </summary>
+            <div class="popover-content">
+              <p>Vimshottari Dasha is a timeline of planetary periods. The active Mahadasha (major period) determines the overarching themes, focus, and energy of this phase of your life.</p>
+            </div>
+          </details>
+        </h4>
         <p><strong>Active Lord: ${currentDashaLord}</strong></p>
         <p>${dashaText}</p>
       </div>

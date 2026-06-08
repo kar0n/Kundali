@@ -733,65 +733,71 @@ tbody tr:hover {
   margin-bottom: 0.75rem;
 }
 
-.interp-guide {
-  background: rgba(139, 92, 246, 0.04);
-  border: 1px solid rgba(139, 92, 246, 0.15);
-  border-radius: var(--radius-md);
-  padding: 1.25rem;
-  margin-bottom: 1.5rem;
-  transition: all 0.3s ease;
+/* ═══════════════════════════════════════
+   INFO POPOVER (TOOLTIP)
+   ═══════════════════════════════════════ */
+.info-popover {
+  display: inline-block;
+  position: relative;
+  margin-left: 0.5rem;
+  vertical-align: middle;
 }
 
-.interp-guide summary {
+.info-popover summary {
+  list-style: none;
   cursor: pointer;
-  font-size: 0.95rem;
   color: var(--accent-indigo);
-  list-style: none; /* Hide default arrow in some browsers */
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-weight: 500;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: rgba(139, 92, 246, 0.1);
+  transition: background 0.2s;
   user-select: none;
 }
 
-.interp-guide summary::-webkit-details-marker {
-  display: none; /* Hide default arrow in Safari */
+.info-popover summary::-webkit-details-marker {
+  display: none;
 }
 
-.interp-guide summary::before {
-  content: "►";
-  font-size: 0.8rem;
-  transition: transform 0.2s ease;
+.info-popover summary:hover {
+  background: rgba(139, 92, 246, 0.2);
 }
 
-.interp-guide[open] summary::before {
-  transform: rotate(90deg);
-}
-
-.guide-content {
-  margin-top: 1.25rem;
-  padding-top: 1rem;
-  border-top: 1px dashed rgba(139, 92, 246, 0.2);
-}
-
-.interp-guide-small {
-  padding: 0.75rem 1rem;
-  margin-bottom: 1rem;
-}
-
-.interp-guide-small summary {
+.popover-content {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: 300px;
+  background: white;
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  z-index: 100;
   font-size: 0.85rem;
-}
-
-.interp-guide-small .guide-content {
-  margin-top: 0.75rem;
-  padding-top: 0.75rem;
-}
-
-.interp-guide p {
-  margin: 0 0 1rem 0;
-  font-size: 0.95rem;
+  font-weight: normal;
   color: var(--text-dark);
+  text-align: left;
+  line-height: 1.5;
+}
+
+.popover-content p {
+  margin: 0;
+  color: var(--text-medium);
+}
+
+@media (max-width: 600px) {
+  .popover-content {
+    left: auto;
+    right: -10px;
+    transform: none;
+    width: 280px;
+  }
 }
 
 .guide-grid {
