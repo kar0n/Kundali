@@ -2,85 +2,136 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌌</text></svg>" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🪷</text></svg>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vedic Kundali Generator</title>
+    <meta name="description" content="Generate accurate Vedic Kundali (Birth Chart) with planetary positions, Navamsha, and Vimshottari Dasha calculations." />
+    <title>Vedic Kundali — Jyotish Birth Chart Generator</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/src/styles/main.css">
   </head>
   <body>
     <div id="app">
+
+      <!-- Hero -->
       <header class="hero">
-        <div class="stars"></div>
-        <h1>Vedic Kundali</h1>
-        <p>Premium Jyotish Astrology Calculator</p>
+        <div class="hero-glow"></div>
+        <p class="hero-eyebrow">✦ Vedic Astrology</p>
+        <h1>Kundali</h1>
+        <p class="hero-sub">Precision Jyotish birth chart generation powered by Swiss Ephemeris</p>
       </header>
       
       <main class="container">
-        <!-- Input Form Section -->
-        <section class="glass-card" id="input-section">
-          <h2>Birth Details</h2>
+
+        <!-- ─── Birth Details Form ─── -->
+        <section class="form-card" id="input-section">
+          <div class="card-accent"></div>
+
+          <div class="form-header">
+            <h2>Birth Details</h2>
+            <p class="form-subtitle">Enter accurate birth information for precise chart calculation</p>
+          </div>
+          
           <form id="birth-form" autocomplete="off">
+
+            <!-- Name -->
             <div class="form-group">
-              <label for="name">Name (Optional)</label>
-              <input type="text" id="name" placeholder="Enter name">
+              <label for="name">Full Name <span class="label-opt">optional</span></label>
+              <div class="input-with-icon">
+                <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <input type="text" id="name" placeholder="Enter your name" autocomplete="nope">
+              </div>
             </div>
+
+            <div class="form-divider"></div>
             
+            <!-- Date + Time Row -->
             <div class="form-row">
-              <div class="form-group">
-                <label>Date of Birth</label>
-                <div style="display: flex; gap: 0.5rem;">
+              <div class="form-group form-group-wide">
+                <label>
+                  <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  Date of Birth
+                </label>
+                <div class="select-row">
                   <select id="dob-day" required>
                     <option value="" disabled selected>Day</option>
-                    <!-- Days will be populated via JS -->
                   </select>
                   <select id="dob-month" required>
                     <option value="" disabled selected>Month</option>
-                    <option value="01">Jan</option>
-                    <option value="02">Feb</option>
-                    <option value="03">Mar</option>
-                    <option value="04">Apr</option>
+                    <option value="01">January</option>
+                    <option value="02">February</option>
+                    <option value="03">March</option>
+                    <option value="04">April</option>
                     <option value="05">May</option>
-                    <option value="06">Jun</option>
-                    <option value="07">Jul</option>
-                    <option value="08">Aug</option>
-                    <option value="09">Sep</option>
-                    <option value="10">Oct</option>
-                    <option value="11">Nov</option>
-                    <option value="12">Dec</option>
+                    <option value="06">June</option>
+                    <option value="07">July</option>
+                    <option value="08">August</option>
+                    <option value="09">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
                   </select>
                   <select id="dob-year" required>
                     <option value="" disabled selected>Year</option>
-                    <!-- Years will be populated via JS -->
                   </select>
                 </div>
               </div>
-              <div class="form-group">
-                <label for="time">Time of Birth</label>
-                <input type="time" id="time" required>
+
+              <div class="form-group form-group-wide">
+                <label>
+                  <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  Time of Birth
+                </label>
+                <div class="select-row">
+                  <select id="tob-hour" required>
+                    <option value="" disabled selected>Hour</option>
+                  </select>
+                  <select id="tob-minute" required>
+                    <option value="" disabled selected>Min</option>
+                  </select>
+                  <select id="tob-period">
+                    <option value="AM">AM</option>
+                    <option value="PM">PM</option>
+                  </select>
+                </div>
               </div>
             </div>
-            
+
+            <div class="form-divider"></div>
+
+            <!-- City -->
             <div class="form-group">
-              <label for="city">City of Birth</label>
-              <input type="text" id="city" placeholder="e.g. Mumbai, India" required>
-              <small>Coordinates will be calculated automatically.</small>
+              <label for="city">
+                <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                City of Birth
+              </label>
+              <div class="input-with-icon">
+                <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                <input type="text" id="city" name="x_birthplace_x" placeholder="e.g. Mumbai, India" required autocomplete="new-password" data-lpignore="true" data-form-type="other" role="presentation">
+              </div>
+              <span class="field-hint">Longitude &amp; latitude will be resolved automatically</span>
             </div>
-            
-            <button type="submit" id="generate-btn" class="primary-btn">Generate Kundali</button>
+
+            <button type="submit" id="generate-btn" class="generate-btn">
+              <span>Generate Kundali</span>
+              <svg class="btn-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </button>
           </form>
+
           <div id="loading" class="hidden">
-            <div class="spinner"></div>
-            <p>Calculating planetary positions with high precision...</p>
+            <div class="loader">
+              <div class="loader-ring"></div>
+              <div class="loader-ring"></div>
+              <div class="loader-ring"></div>
+            </div>
+            <p class="loading-text">Calculating planetary positions…</p>
           </div>
         </section>
 
-        <!-- Results Section (Initially Hidden) -->
+        <!-- ─── Results (Initially Hidden) ─── -->
         <div id="results" class="hidden">
           
-          <!-- Charts Grid -->
           <div class="charts-grid">
             <div class="glass-card chart-container">
               <h3>Rashi Chart (D1)</h3>
@@ -92,7 +143,6 @@
             </div>
           </div>
           
-          <!-- Planetary Details Table -->
           <section class="glass-card" id="planet-table-section">
             <h3>Planetary Positions</h3>
             <div class="table-responsive">
@@ -113,7 +163,6 @@
             </div>
           </section>
 
-          <!-- Dasha Timeline -->
           <section class="glass-card" id="dasha-section">
             <h3>Vimshottari Dasha</h3>
             <p id="dasha-balance" class="dasha-balance"></p>
@@ -125,11 +174,12 @@
         </div>
       </main>
     </div>
-    
-    <!-- Inline script for dropdown population — zero dependencies, always runs -->
+
+    <!-- ─── Inline script: populates dropdowns + attaches form handler ─── -->
+    <!-- Zero external dependencies — always runs regardless of module loading -->
     <script>
       (function() {
-        // Populate Day Dropdown (1–31)
+        // ── Day (1–31) ──
         var daySelect = document.getElementById('dob-day');
         for (var i = 1; i <= 31; i++) {
           var opt = document.createElement('option');
@@ -139,7 +189,7 @@
           daySelect.appendChild(opt);
         }
 
-        // Populate Year Dropdown (current year down to 1900)
+        // ── Year (current → 1900) ──
         var yearSelect = document.getElementById('dob-year');
         var currentYear = new Date().getFullYear();
         for (var y = currentYear; y >= 1900; y--) {
@@ -148,10 +198,55 @@
           opt.textContent = '' + y;
           yearSelect.appendChild(opt);
         }
+
+        // ── Hour (1–12) ──
+        var hourSelect = document.getElementById('tob-hour');
+        for (var h = 1; h <= 12; h++) {
+          var opt = document.createElement('option');
+          var val = h < 10 ? '0' + h : '' + h;
+          opt.value = val;
+          opt.textContent = val;
+          hourSelect.appendChild(opt);
+        }
+
+        // ── Minute (00–59) ──
+        var minSelect = document.getElementById('tob-minute');
+        for (var m = 0; m <= 59; m++) {
+          var opt = document.createElement('option');
+          var val = m < 10 ? '0' + m : '' + m;
+          opt.value = val;
+          opt.textContent = val;
+          minSelect.appendChild(opt);
+        }
+
+        // ── Form submit handler ──
+        // The module script will set window.__generateKundali when it loads.
+        // This handler runs immediately regardless — if the module hasn't loaded yet,
+        // it shows a helpful message instead of silently doing nothing.
+        document.getElementById('birth-form').addEventListener('submit', function(e) {
+          e.preventDefault();
+          if (typeof window.__generateKundali === 'function') {
+            window.__generateKundali();
+          } else {
+            var btn = document.getElementById('generate-btn');
+            var original = btn.innerHTML;
+            btn.innerHTML = '<span>Loading astrology engine…</span>';
+            btn.disabled = true;
+            btn.style.opacity = '0.6';
+            setTimeout(function() {
+              btn.innerHTML = original;
+              btn.disabled = false;
+              btn.style.opacity = '';
+              if (typeof window.__generateKundali !== 'function') {
+                alert('The astrology engine could not be loaded. Please refresh the page and try again.');
+              }
+            }, 3000);
+          }
+        });
       })();
     </script>
 
-    <!-- App module loaded separately so dropdown UI is never blocked -->
+    <!-- Module script — loads asynchronously, sets window.__generateKundali -->
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

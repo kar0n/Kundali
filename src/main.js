@@ -7,100 +7,125 @@ import { renderRashiChart } from './charts/rashi-chart.js';
 import { renderNavamshaChart } from './charts/navamsha-chart.js';
 import { renderPlanetTable } from './ui/planet-table.js';
 import { renderDashaTimeline } from './dasha/dasha-display.js';
+
 let swe = null;
 
+// ── Initialize ephemeris ──
 async function initializeApp() {
   try {
     swe = await initEphemeris();
-    console.log("Swiss Ephemeris loaded successfully");
+    console.log('Swiss Ephemeris loaded successfully');
   } catch (err) {
-    console.error("Failed to load Swiss Ephemeris:", err);
-    alert("There was an error loading the astrology engine. Please try refreshing.");
+    console.error('Failed to load Swiss Ephemeris:', err);
   }
 }
 
-// Ensure init runs regardless of when module is executed
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initializeApp);
 } else {
   initializeApp();
 }
 
-document.getElementById('birth-form').addEventListener('submit', async (e) => {
-  e.preventDefault();
-  
+// ── Generate Kundali handler ──
+// Exposed as a global so the inline script's form handler can call it
+// even though this is a module (modules don't pollute the global scope).
+window.__generateKundali = async function () {
   if (!swe) {
-    alert("Astrology engine is still loading. Please wait a moment and try again.");
+    alert('Astrology engine is still loading. Please wait a moment and try again.');
     return;
   }
-  
+
+  // ── Read Date ──
   const dd = document.getElementById('dob-day').value;
   const mm = document.getElementById('dob-month').value;
   const yy = document.getElementById('dob-year').value;
+
+  if (!dd || !mm || !yy) {
+    alert('Please select your complete date of birth.');
+    return;
+  }
+
   const date = `${yy}-${mm}-${dd}`;
-  
-  const time = document.getElementById('time').value;
-  const cityName = document.getElementById('city').value;
-  
-  // Hardcode Timezone to Indian Standard Time (IST)
-  const tz = 5.5; 
-  
+
+  // ── Read Time (12-hour → 24-hour) ──
+  const hourVal = document.getElementById('tob-hour').value;
+  const minuteVal = document.getElementById('tob-minute').value;
+  const period = document.getElementById('tob-period').value;
+
+  if (!hourVal || !minuteVal) {
+    alert('Please select your time of birth.');
+    return;
+  }
+
+  let hour24 = parseInt(hourVal, 10);
+  if (period === 'AM' && hour24 === 12) hour24 = 0;
+  if (period === 'PM' && hour24 !== 12) hour24 += 12;
+  const time = `${hour24.toString().padStart(2, '0')}:${minuteVal}`;
+
+  // ── Read City ──
+  const cityName = document.getElementById('city').value.trim();
+  if (!cityName) {
+    alert('Please enter your city of birth.');
+    return;
+  }
+
+  // IST timezone
+  const tz = 5.5;
+
   // Show Loading
   document.getElementById('loading').classList.remove('hidden');
   document.getElementById('results').classList.add('hidden');
-  
+
   try {
     // Geocode City Name via Nominatim
-    const geocodeRes = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(cityName)}&limit=1`);
+    const geocodeRes = await fetch(
+      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(cityName)}&limit=1`
+    );
     const geocodeData = await geocodeRes.json();
-    
+
     if (!geocodeData || geocodeData.length === 0) {
       alert("City not found. Please enter a valid city name (e.g. 'Mumbai, India').");
       document.getElementById('loading').classList.add('hidden');
       return;
     }
-    
+
     const lat = parseFloat(geocodeData[0].lat);
     const lng = parseFloat(geocodeData[0].lon);
 
     // 1. Calculate Julian Day
     const jd = dateToJulianDay(date, time, tz);
-    
+
     // 2. Ascendant (Lagna)
     const ascendant = calculateAscendant(swe, jd, lat, lng);
-    
+
     // 3. Planets
     let planets = calculatePlanets(swe, jd);
-    
+
     // 4. Map to D1 Houses
     planets = mapToHouses(planets, ascendant.signIndex);
-    
+
     // 5. Navamsha (D9) Chart
     const { d9Planets, d9AscendantSignIndex } = generateD9Chart(planets, ascendant.longitude);
-    
+
     // 6. Vimshottari Dasha
     const birthDateObj = new Date(`${date}T${time}:00`);
-    // Adjust birthDateObj to local time accounting for the user's input timezone
-    // The browser might assume local TZ, so we need to be careful if we want accurate Dasha dates.
-    // For simplicity, we just use local browser timezone for displaying dates in this demo.
     const dasha = calculateDasha(planets.MOON.longitude, birthDateObj);
-    
+
     // Render UI
     renderRashiChart('d1-chart', planets, ascendant.signIndex);
     renderNavamshaChart('d9-chart', d9Planets, d9AscendantSignIndex);
     renderPlanetTable('planet-table-section', planets, ascendant);
     renderDashaTimeline('dasha-balance', 'dasha-timeline', dasha);
-    
+
     // Hide Loading, Show Results
     document.getElementById('loading').classList.add('hidden');
     document.getElementById('results').classList.remove('hidden');
-    
+
     // Scroll to results
     document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
-    
   } catch (err) {
-    console.error("Calculation Error:", err);
-    alert("Error calculating charts. Please check the console for details.");
+    console.error('Calculation Error:', err);
+    alert('Error calculating charts. Please check the console for details.');
     document.getElementById('loading').classList.add('hidden');
   }
-});
+};
