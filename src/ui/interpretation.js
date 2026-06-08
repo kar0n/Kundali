@@ -36,10 +36,10 @@ export function renderInterpretation(containerId, planets, ascendant, dasha) {
             </div>
           </details>
         </h4>
-        <p>${ascendantText}</p>
+        <p><strong>${ascendant.signName}</strong> - ${ascendantText}</p>
       </div>
       <div class="interp-card">
-        <h4><span class="interp-icon">🌍</span> Sun (Western)
+        <h4><span class="interp-icon">🌍</span> Zodiac Sign (Western)
           <details class="info-popover">
             <summary title="What it represents">
               <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
@@ -62,7 +62,7 @@ export function renderInterpretation(containerId, planets, ascendant, dasha) {
             </div>
           </details>
         </h4>
-        <p>${sunText}</p>
+        <p><strong>${planets.SUN.signName}</strong> - ${sunText}</p>
       </div>
       <div class="interp-card">
         <h4><span class="interp-icon">🌙</span> Moon (Chandra)
@@ -75,7 +75,7 @@ export function renderInterpretation(containerId, planets, ascendant, dasha) {
             </div>
           </details>
         </h4>
-        <p>${moonText}</p>
+        <p><strong>${planets.MOON.signName}</strong> - ${moonText}</p>
       </div>
       <div class="interp-card">
         <h4><span class="interp-icon">✨</span> Moon's Nakshatra
