@@ -145,6 +145,13 @@
           
           <section class="glass-card" id="planet-table-section">
             <h3>Planetary Positions</h3>
+            <p class="interp-def" style="margin-bottom: 1.5rem;">
+              <strong>How to interpret this data:</strong> This table displays the exact astronomical position of each celestial body at the precise moment of your birth.<br>
+              • <strong>Planet:</strong> The "actor" representing a specific psychological drive (e.g., Venus for love, Mars for drive).<br>
+              • <strong>Sign:</strong> The "costume" the planet wears, changing how it expresses its natural energy.<br>
+              • <strong>Degree:</strong> The exact coordinate (0°-30°) within that sign.<br>
+              • <strong>Nakshatra & Pada:</strong> The specific lunar mansion and its quarter. Nakshatras provide a much deeper, more nuanced "flavor" to the planet's expression than the zodiac sign alone.
+            </p>
             <div class="table-responsive">
               <table id="planet-table">
                 <thead>
@@ -187,7 +194,51 @@
         flatpickr("#dob-input", {
           dateFormat: "Y-m-d",
           allowInput: true,
-          maxDate: "today"
+          maxDate: "today",
+          onReady: function(selectedDates, dateStr, instance) {
+            var yearWrapper = instance.currentYearElement.parentNode;
+            
+            // Hide the default number input and arrows
+            instance.currentYearElement.style.display = 'none';
+            var arrows = yearWrapper.querySelectorAll('.arrowUp, .arrowDown');
+            for(var i=0; i<arrows.length; i++) arrows[i].style.display = 'none';
+            
+            // Create a custom select element for the year
+            var select = document.createElement('select');
+            select.className = 'flatpickr-monthDropdown-months'; // Reuse flatpickr styling
+            select.style.marginLeft = '10px';
+            select.style.cursor = 'pointer';
+            
+            var currentYear = new Date().getFullYear();
+            // Start default selected at 1995 if no date is set, otherwise use current year
+            // But populate options from currentYear down to 1950
+            for (var y = currentYear; y >= 1950; y--) {
+              var option = document.createElement('option');
+              option.value = y;
+              option.textContent = y;
+              select.appendChild(option);
+            }
+            
+            select.value = instance.currentYear;
+            
+            // Handle select changes
+            select.addEventListener('change', function(e) {
+              instance.changeYear(e.target.value);
+            });
+            
+            yearWrapper.appendChild(select);
+            
+            // Start the calendar at 1995 by default (if no date is already selected)
+            if (selectedDates.length === 0) {
+              instance.jumpToDate("1995-01-01");
+              select.value = 1995;
+            }
+          },
+          onYearChange: function(selectedDates, dateStr, instance) {
+            // Keep select in sync when year changes via other means (e.g., month navigation wrapping around)
+            var select = instance.currentYearElement.parentNode.querySelector('select');
+            if(select) select.value = instance.currentYear;
+          }
         });
 
         // ── Hour (1–12) ──
