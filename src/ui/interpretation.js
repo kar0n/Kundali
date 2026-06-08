@@ -38,7 +38,7 @@ export function renderInterpretation(containerId, planets, ascendant, dasha) {
         <p>${ascendantText}</p>
       </div>
       <div class="interp-card">
-        <h4><span class="interp-icon">☀️</span> Sun (Surya)
+        <h4><span class="interp-icon">☀️</span> Sun (Vedic)
           <details class="info-popover">
             <summary title="What it represents">
               <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
@@ -49,6 +49,19 @@ export function renderInterpretation(containerId, planets, ascendant, dasha) {
           </details>
         </h4>
         <p>${sunText}</p>
+      </div>
+      <div class="interp-card">
+        <h4><span class="interp-icon">🌍</span> Sun (Western)
+          <details class="info-popover">
+            <summary title="What it represents">
+              <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+            </summary>
+            <div class="popover-content">
+              <p>This is your Sun sign in the Western (Tropical) astrological system. It is based on the Earth's seasons and dates rather than the physical background stars.</p>
+            </div>
+          </details>
+        </h4>
+        <p>Your Western Sun sign is <strong>${planets.SUN.tropicalSignName}</strong>.</p>
       </div>
       <div class="interp-card">
         <h4><span class="interp-icon">🌙</span> Moon (Chandra)

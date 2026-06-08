@@ -100,6 +100,7 @@ export function calculatePlanets(jd) {
 
     // Sign calculations
     const signIndex = Math.floor(longitude / 30);
+    const tropicalSignIndex = Math.floor(tropicalLongitude / 30);
     const degreeInSign = longitude % 30;
 
     // Nakshatra calculations (each is 13°20' = 13.333333°)
@@ -114,6 +115,9 @@ export function calculatePlanets(jd) {
     results[key] = {
       ...planetInfo,
       longitude,
+      tropicalLongitude,
+      tropicalSignIndex,
+      tropicalSignName: SIGNS[tropicalSignIndex].name,
       speed: speed || 0,
       isRetrograde,
       signIndex,
