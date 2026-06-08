@@ -75,11 +75,18 @@ export function calculatePlanets(jd) {
     } else {
       // Use astronomy-engine for standard planets
       const bodyName = BODY_MAP[key];
-      tropicalLongitude = Astronomy.EclipticLongitude(bodyName, astroTime);
+
+      // Geocentric vector with aberration (light-time correction)
+      const geoVec = Astronomy.GeoVector(bodyName, astroTime, true);
+      const eclip = Astronomy.Ecliptic(geoVec);
+      tropicalLongitude = eclip.elon;
 
       // Compute speed via numerical differentiation
-      const longBefore = Astronomy.EclipticLongitude(bodyName, timeBefore);
-      const longAfter = Astronomy.EclipticLongitude(bodyName, timeAfter);
+      const geoVecBefore = Astronomy.GeoVector(bodyName, timeBefore, true);
+      const geoVecAfter = Astronomy.GeoVector(bodyName, timeAfter, true);
+      const longBefore = Astronomy.Ecliptic(geoVecBefore).elon;
+      const longAfter = Astronomy.Ecliptic(geoVecAfter).elon;
+      
       speed = (longAfter - longBefore) / 0.02;
       // Handle wrap-around at 0°/360°
       if (Math.abs(speed) > 180) {
