@@ -143,15 +143,25 @@
             <!-- Populated via JS -->
           </section>
           
+          <section class="glass-card" id="dasha-section">
+            <h3>Vimshottari Dasha</h3>
+            <p id="dasha-balance" class="dasha-balance"></p>
+            <div id="dasha-timeline" class="dasha-timeline">
+              <!-- Populated via JS -->
+            </div>
+          </section>
+          
           <section class="glass-card" id="planet-table-section">
             <h3>Planetary Positions</h3>
-            <p class="interp-def" style="margin-bottom: 1.5rem;">
-              <strong>How to interpret this data:</strong> This table displays the exact astronomical position of each celestial body at the precise moment of your birth.<br>
-              • <strong>Planet:</strong> The "actor" representing a specific psychological drive (e.g., Venus for love, Mars for drive).<br>
-              • <strong>Sign:</strong> The "costume" the planet wears, changing how it expresses its natural energy.<br>
-              • <strong>Degree:</strong> The exact coordinate (0°-30°) within that sign.<br>
-              • <strong>Nakshatra & Pada:</strong> The specific lunar mansion and its quarter. Nakshatras provide a much deeper, more nuanced "flavor" to the planet's expression than the zodiac sign alone.
-            </p>
+            <div class="interp-guide">
+              <p><strong>How to interpret this data:</strong> This table displays the exact astronomical position of each celestial body at the precise moment of your birth.</p>
+              <div class="guide-grid">
+                <div class="guide-item"><strong>Planet:</strong> The "actor" representing a specific psychological drive.</div>
+                <div class="guide-item"><strong>Sign:</strong> The "costume" the planet wears, changing its natural energy.</div>
+                <div class="guide-item"><strong>Degree:</strong> The exact coordinate (0°-30°) within that sign.</div>
+                <div class="guide-item"><strong>Nakshatra & Pada:</strong> The lunar mansion and quarter, providing deep nuanced "flavor".</div>
+              </div>
+            </div>
             <div class="table-responsive">
               <table id="planet-table">
                 <thead>
@@ -167,14 +177,6 @@
                   <!-- Populated via JS -->
                 </tbody>
               </table>
-            </div>
-          </section>
-
-          <section class="glass-card" id="dasha-section">
-            <h3>Vimshottari Dasha</h3>
-            <p id="dasha-balance" class="dasha-balance"></p>
-            <div id="dasha-timeline" class="dasha-timeline">
-              <!-- Populated via JS -->
             </div>
           </section>
           
@@ -211,8 +213,8 @@
             
             var currentYear = new Date().getFullYear();
             // Start default selected at 1995 if no date is set, otherwise use current year
-            // But populate options from currentYear down to 1950
-            for (var y = currentYear; y >= 1950; y--) {
+            // Populate options from 1950 up to currentYear (ascending)
+            for (var y = 1950; y <= currentYear; y++) {
               var option = document.createElement('option');
               option.value = y;
               option.textContent = y;

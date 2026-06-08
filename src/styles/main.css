@@ -733,6 +733,42 @@ tbody tr:hover {
   margin-bottom: 0.75rem;
 }
 
+.interp-guide {
+  background: rgba(139, 92, 246, 0.04);
+  border: 1px solid rgba(139, 92, 246, 0.15);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.interp-guide p {
+  margin: 0 0 1rem 0;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+}
+
+.guide-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.guide-item {
+  background: white;
+  padding: 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem;
+  color: var(--text-medium);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.guide-item strong {
+  color: var(--accent-indigo);
+  display: block;
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+
 .interp-card p {
   font-size: 0.92rem;
   color: var(--text-medium);
