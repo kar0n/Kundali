@@ -774,6 +774,20 @@ tbody tr:hover {
   border-top: 1px dashed rgba(139, 92, 246, 0.2);
 }
 
+.interp-guide-small {
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.interp-guide-small summary {
+  font-size: 0.85rem;
+}
+
+.interp-guide-small .guide-content {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+}
+
 .interp-guide p {
   margin: 0 0 1rem 0;
   font-size: 0.95rem;

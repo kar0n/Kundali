@@ -105,7 +105,7 @@ window.__generateKundali = async function () {
       <div class="user-detail-item"><strong>Name:</strong> ${nameStr}</div>
       <div class="user-detail-item"><strong>Date:</strong> ${date}</div>
       <div class="user-detail-item"><strong>Time:</strong> ${time}</div>
-      <div class="user-detail-item"><strong>Location:</strong> ${cityName}</div>
+      <div class="user-detail-item"><strong>Location:</strong> ${cityName} (${lat.toFixed(2)}°, ${lng.toFixed(2)}°)</div>
     `;
 
     // Dashboard Transition
