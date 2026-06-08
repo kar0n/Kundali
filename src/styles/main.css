@@ -739,6 +739,39 @@ tbody tr:hover {
   border-radius: var(--radius-md);
   padding: 1.25rem;
   margin-bottom: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.interp-guide summary {
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--accent-indigo);
+  list-style: none; /* Hide default arrow in some browsers */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  user-select: none;
+}
+
+.interp-guide summary::-webkit-details-marker {
+  display: none; /* Hide default arrow in Safari */
+}
+
+.interp-guide summary::before {
+  content: "►";
+  font-size: 0.8rem;
+  transition: transform 0.2s ease;
+}
+
+.interp-guide[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.guide-content {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px dashed rgba(139, 92, 246, 0.2);
 }
 
 .interp-guide p {
