@@ -126,6 +126,32 @@
       </main>
     </div>
     
+    <!-- Inline script for dropdown population — zero dependencies, always runs -->
+    <script>
+      (function() {
+        // Populate Day Dropdown (1–31)
+        var daySelect = document.getElementById('dob-day');
+        for (var i = 1; i <= 31; i++) {
+          var opt = document.createElement('option');
+          var val = i < 10 ? '0' + i : '' + i;
+          opt.value = val;
+          opt.textContent = val;
+          daySelect.appendChild(opt);
+        }
+
+        // Populate Year Dropdown (current year down to 1900)
+        var yearSelect = document.getElementById('dob-year');
+        var currentYear = new Date().getFullYear();
+        for (var y = currentYear; y >= 1900; y--) {
+          var opt = document.createElement('option');
+          opt.value = '' + y;
+          opt.textContent = '' + y;
+          yearSelect.appendChild(opt);
+        }
+      })();
+    </script>
+
+    <!-- App module loaded separately so dropdown UI is never blocked -->
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
