@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="/src/styles/main.css">
   </head>
   <body>
@@ -49,32 +50,13 @@
             <!-- Date + Time Row -->
             <div class="form-row">
               <div class="form-group form-group-wide">
-                <label>
+                <label for="dob-input">
                   <svg class="label-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                   Date of Birth
                 </label>
-                <div class="select-row">
-                  <select id="dob-day" required>
-                    <option value="" disabled selected>Day</option>
-                  </select>
-                  <select id="dob-month" required>
-                    <option value="" disabled selected>Month</option>
-                    <option value="01">January</option>
-                    <option value="02">February</option>
-                    <option value="03">March</option>
-                    <option value="04">April</option>
-                    <option value="05">May</option>
-                    <option value="06">June</option>
-                    <option value="07">July</option>
-                    <option value="08">August</option>
-                    <option value="09">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
-                  </select>
-                  <select id="dob-year" required>
-                    <option value="" disabled selected>Year</option>
-                  </select>
+                <div class="input-with-icon">
+                  <svg class="field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                  <input type="text" id="dob-input" placeholder="Select Date of Birth" required autocomplete="off" style="cursor: pointer;">
                 </div>
               </div>
 
@@ -181,30 +163,18 @@
 
     <!-- ─── astronomy-engine (pure JS, no WASM) ─── -->
     <script src="https://cdn.jsdelivr.net/npm/astronomy-engine@2.1.19/astronomy.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <!-- ─── Inline script: populates dropdowns + attaches form handler ─── -->
     <!-- Zero external dependencies — always runs regardless of module loading -->
     <script>
       (function() {
-        // ── Day (1–31) ──
-        var daySelect = document.getElementById('dob-day');
-        for (var i = 1; i <= 31; i++) {
-          var opt = document.createElement('option');
-          var val = i < 10 ? '0' + i : '' + i;
-          opt.value = val;
-          opt.textContent = val;
-          daySelect.appendChild(opt);
-        }
-
-        // ── Year (current → 1900) ──
-        var yearSelect = document.getElementById('dob-year');
-        var currentYear = new Date().getFullYear();
-        for (var y = currentYear; y >= 1900; y--) {
-          var opt = document.createElement('option');
-          opt.value = '' + y;
-          opt.textContent = '' + y;
-          yearSelect.appendChild(opt);
-        }
+        // ── Initialize Flatpickr ──
+        flatpickr("#dob-input", {
+          dateFormat: "Y-m-d",
+          allowInput: true,
+          maxDate: "today"
+        });
 
         // ── Hour (1–12) ──
         var hourSelect = document.getElementById('tob-hour');

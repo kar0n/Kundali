@@ -19,16 +19,12 @@ window.__generateKundali = async function () {
   }
 
   // ── Read Date ──
-  const dd = document.getElementById('dob-day').value;
-  const mm = document.getElementById('dob-month').value;
-  const yy = document.getElementById('dob-year').value;
-
-  if (!dd || !mm || !yy) {
-    alert('Please select your complete date of birth.');
+  const dateVal = document.getElementById('dob-input').value;
+  if (!dateVal) {
+    alert('Please select your date of birth.');
     return;
   }
-
-  const date = `${yy}-${mm}-${dd}`;
+  const date = dateVal;
 
   // ── Read Time (12-hour → 24-hour) ──
   const hourVal = document.getElementById('tob-hour').value;
