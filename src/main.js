@@ -97,15 +97,47 @@ window.__generateKundali = async function () {
     renderPlanetTable('planet-table-section', planets, ascendant);
     renderDashaTimeline('dasha-balance', 'dasha-timeline', dasha);
 
-    // Hide Loading, Show Results
+    // Populate Dashboard Header
+    const nameStr = document.getElementById('name').value.trim() || 'Anonymous';
+    document.getElementById('user-details').innerHTML = `
+      <div class="user-detail-item"><strong>Name:</strong> ${nameStr}</div>
+      <div class="user-detail-item"><strong>Date:</strong> ${date}</div>
+      <div class="user-detail-item"><strong>Time:</strong> ${time}</div>
+      <div class="user-detail-item"><strong>Location:</strong> ${cityName}</div>
+    `;
+
+    // Dashboard Transition
     document.getElementById('loading').classList.add('hidden');
+    document.getElementById('input-section').classList.add('hidden');
+    document.querySelector('.hero').classList.add('hidden');
+    
+    document.getElementById('main-container').classList.add('dashboard-mode');
+    
+    document.getElementById('dashboard-header').classList.remove('hidden');
     document.getElementById('results').classList.remove('hidden');
 
-    // Scroll to results
-    document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   } catch (err) {
     console.error('Calculation Error:', err);
     alert('Error calculating charts. Please check the console for details.');
     document.getElementById('loading').classList.add('hidden');
   }
 };
+
+// ── Back Button Handler ──
+document.addEventListener('DOMContentLoaded', () => {
+  const backBtn = document.getElementById('back-btn');
+  if (backBtn) {
+    backBtn.addEventListener('click', () => {
+      document.getElementById('results').classList.add('hidden');
+      document.getElementById('dashboard-header').classList.add('hidden');
+      
+      document.getElementById('main-container').classList.remove('dashboard-mode');
+      
+      document.querySelector('.hero').classList.remove('hidden');
+      document.getElementById('input-section').classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+});
+

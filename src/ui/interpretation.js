@@ -1,4 +1,5 @@
-import { ASCENDANT_MEANINGS, SUN_SIGN_MEANINGS, MOON_SIGN_MEANINGS, DASHA_MEANINGS } from '../astro/interpretation-data.js';
+import { ASCENDANT_MEANINGS, SUN_SIGN_MEANINGS, MOON_SIGN_MEANINGS, DASHA_MEANINGS, NAKSHATRA_MEANINGS } from '../astro/interpretation-data.js';
+import { NAKSHATRAS } from '../astro/constants.js';
 
 export function renderInterpretation(containerId, planets, ascendant, dasha) {
   const container = document.getElementById(containerId);
@@ -7,11 +8,7 @@ export function renderInterpretation(containerId, planets, ascendant, dasha) {
   const ascendantText = ASCENDANT_MEANINGS[ascendant.signIndex] || "Interpretation not available.";
   const sunText = SUN_SIGN_MEANINGS[planets.SUN.signIndex] || "Interpretation not available.";
   const moonText = MOON_SIGN_MEANINGS[planets.MOON.signIndex] || "Interpretation not available.";
-  
-  // Find the currently active dasha lord
-  // If the chart was just calculated, dasha.startingLord is the current lord at birth.
-  // Wait, the user wants the interpretation of the *current* Dasha.
-  // Since the user didn't enter a current date, we'll interpret the current Dasha based on today's date!
+  const nakshatraText = NAKSHATRA_MEANINGS[planets.MOON.nakshatraIndex] || "Interpretation not available.";
   
   const now = new Date();
   let currentDashaLord = dasha.startingLord;
@@ -29,18 +26,27 @@ export function renderInterpretation(containerId, planets, ascendant, dasha) {
     <div class="interpretation-grid">
       <div class="interp-card">
         <h4><span class="interp-icon">🌅</span> Ascendant (Lagna)</h4>
+        <p class="interp-def"><strong>What it represents:</strong> The Ascendant is the zodiac sign that was rising on the eastern horizon when you were born. It represents your outward personality, physical appearance, and how you interact with the world.</p>
         <p>${ascendantText}</p>
       </div>
       <div class="interp-card">
         <h4><span class="interp-icon">☀️</span> Sun (Surya)</h4>
+        <p class="interp-def"><strong>What it represents:</strong> The Sun represents your ego, core identity, and soul purpose. It dictates where you seek to shine, your natural authority, and your vitality.</p>
         <p>${sunText}</p>
       </div>
       <div class="interp-card">
         <h4><span class="interp-icon">🌙</span> Moon (Chandra)</h4>
+        <p class="interp-def"><strong>What it represents:</strong> The Moon represents your mind, emotions, and how you process the world internally. It dictates your emotional needs, intuition, and your deepest psychological nature.</p>
         <p>${moonText}</p>
       </div>
       <div class="interp-card">
+        <h4><span class="interp-icon">✨</span> Moon's Nakshatra</h4>
+        <p class="interp-def"><strong>What it represents:</strong> Nakshatras are the 27 lunar mansions. The Nakshatra your Moon was in at birth provides extremely specific insights into your mind's true nature and triggers your Dasha timeline.</p>
+        <p><strong>${NAKSHATRAS[planets.MOON.nakshatraIndex]}</strong> - ${nakshatraText}</p>
+      </div>
+      <div class="interp-card" style="grid-column: 1 / -1;">
         <h4><span class="interp-icon">⏳</span> Current Phase (Mahadasha)</h4>
+        <p class="interp-def"><strong>What it represents:</strong> Vimshottari Dasha is a timeline of planetary periods. The active Mahadasha (major period) determines the overarching themes, focus, and energy of this phase of your life.</p>
         <p><strong>Active Lord: ${currentDashaLord}</strong></p>
         <p>${dashaText}</p>
       </div>

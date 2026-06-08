@@ -54,3 +54,33 @@ export const DASHA_MEANINGS = {
   "Ketu": "Ketu Mahadasha (7 Years): A deeply spiritual and often introverted period. It brings a detachment from material desires, prompting spiritual seeking, sudden endings, and the uncovering of past karmas.",
   "Venus": "Venus Mahadasha (20 Years): A period focused on relationships, luxury, aesthetics, and harmony. It is a time for enjoying the comforts of life, finding love, and engaging in creative and social pursuits."
 };
+
+export const NAKSHATRA_MEANINGS = [
+  "Ashwini: The 'Star of Transport'. It gives a dynamic, pioneering, and healing energy. You are quick, direct, and love new beginnings.",
+  "Bharani: The 'Star of Restraint'. It embodies transformation, extreme intensity, and deep emotional creativity. You are passionate and determined.",
+  "Krittika: The 'Star of Fire'. It provides a sharp, purifying, and protective energy. You are critical, brilliant, and stand fiercely for truth.",
+  "Rohini: The 'Star of Ascent'. It grants immense charm, magnetism, and a love for luxury and beauty. You are deeply connected to nature and growth.",
+  "Mrigashira: The 'Searching Star'. It instills curiosity, gentleness, and an active mind. You are constantly seeking truth, meaning, and new experiences.",
+  "Ardra: The 'Star of Sorrow'. It brings profound transformation, emotional depth, and mental brilliance. You navigate the storms of life to find clarity.",
+  "Punarvasu: The 'Star of Renewal'. It offers an optimistic, nurturing, and philosophical nature. You easily bounce back from setbacks.",
+  "Pushya: The 'Nourishing Star'. It is considered highly auspicious, granting caring, protective, and spiritual qualities. You are devoted and reliable.",
+  "Ashlesha: The 'Clinging Star'. It bestows profound intuition, intensity, and hypnotic power. You have deep emotional reservoirs and sharp instincts.",
+  "Magha: The 'Star of Power'. It gives a regal, authoritative, and traditional presence. You are deeply connected to your lineage and ancestors.",
+  "Purva Phalguni: The 'Fruit of the Tree'. It grants a love for pleasure, creativity, and relaxation. You are charismatic, affectionate, and enjoy the finer things.",
+  "Uttara Phalguni: The 'Star of Patronage'. It provides a reliable, generous, and stable energy. You value friendship, contracts, and duty.",
+  "Hasta: The 'Hand'. It gives skill, dexterity, and a practical mind. You are capable of manifesting ideas into reality and are detail-oriented.",
+  "Chitra: The 'Bright Star'. It grants artistic brilliance, architectural vision, and a desire to create beauty. You have an eye for design and structure.",
+  "Swati: The 'Independent One'. It brings a diplomatic, freedom-loving, and adaptable nature. You seek balance and are skilled at navigation and commerce.",
+  "Vishakha: The 'Star of Purpose'. It instills fierce determination, ambition, and goal-oriented focus. You have the willpower to overcome any obstacle.",
+  "Anuradha: The 'Star of Success'. It provides a friendly, devoted, and spiritual energy. You value profound connections, loyalty, and group harmony.",
+  "Jyeshtha: The 'Chief Star'. It grants authority, seniority, and protective power. You have a commanding presence and are a natural leader.",
+  "Mula: The 'Root Star'. It brings a deep, investigative, and transformative energy. You seek to uncover the core of matters, sometimes uprooting the past.",
+  "Purva Ashadha: The 'Invincible Star'. It gives strong convictions, independence, and an unyielding nature. You possess the confidence to face challenges head-on.",
+  "Uttara Ashadha: The 'Universal Star'. It provides a patient, deeply grounded, and practical strength. You achieve victory through endurance and integrity.",
+  "Shravana: The 'Star of Listening'. It grants immense receptivity, wisdom, and a desire to learn. You are attuned to higher knowledge and communication.",
+  "Dhanishtha: The 'Star of Symphony'. It brings rhythm, wealth, and social prominence. You are musical, ambitious, and shine in group settings.",
+  "Shatabhisha: The 'Hundred Healers'. It provides a mystical, visionary, and independent energy. You have a deep capacity for healing and understand complex systems.",
+  "Purva Bhadrapada: The 'Scorching Pair'. It grants passionate, intense, and spiritual dedication. You are driven by profound inner visions and transformative goals.",
+  "Uttara Bhadrapada: The 'Warrior Star'. It provides deep wisdom, compassion, and spiritual endurance. You are grounded, protective, and spiritually mature.",
+  "Revati: The 'Wealthy Star'. It grants extreme empathy, nourishment, and a desire to support others. You are deeply intuitive and protective of the vulnerable."
+];

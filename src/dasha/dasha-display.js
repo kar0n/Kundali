@@ -1,3 +1,5 @@
+import { DASHA_MEANINGS } from '../astro/interpretation-data.js';
+
 export function renderDashaTimeline(balanceElementId, timelineElementId, dashaData) {
   const balanceEl = document.getElementById(balanceElementId);
   const timelineEl = document.getElementById(timelineElementId);
@@ -18,6 +20,7 @@ export function renderDashaTimeline(balanceElementId, timelineElementId, dashaDa
           <span class="dasha-dates">${formatDate(maha.startDate)} – ${formatDate(maha.endDate)}</span>
         </summary>
         <div class="dasha-antardashas">
+          <p class="dasha-interp"><em>${DASHA_MEANINGS[maha.lord] || ''}</em></p>
           ${maha.antardashas.map(antar => `
             <div class="dasha-antar">
               <span class="dasha-lord">${maha.lord} / ${antar.lord}</span>
