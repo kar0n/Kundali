@@ -1,21 +1,45 @@
 import { SIGNS } from './constants.js';
 import { calculateLahiriAyanamsha } from './swisseph-init.js';
 
-export function calculateAscendant(swe, jd, lat, lng) {
-  // swe.calculateHouses(jd, lat, lng, houseSystemFlag)
-  // 'W' = Whole sign houses (traditional Vedic)
-  
-  // Actually, we'll calculate Placidus or just use Ascendant degree.
-  // In Whole Sign, the 1st house is the entire sign the Ascendant falls into.
-  const houseData = swe.calculateHouses(jd, lat, lng, 'P');
+export function calculateAscendant(jd, lat, lng) {
+  // Convert JD to JS Date and AstroTime
+  const date = new Date((jd - 2440587.5) * 86400000);
+  const astroTime = Astronomy.MakeTime(date);
+
+  // Greenwich Mean Sidereal Time (in hours)
+  const gmst = Astronomy.SiderealTime(astroTime);
+
+  // Local Sidereal Time (in hours)
+  const lst = gmst + lng / 15.0;
+
+  // Right Ascension of Medium Coeli (in degrees)
+  const ramc = lst * 15.0;
+
+  // Obliquity of the ecliptic
+  const T = (jd - 2451545.0) / 36525.0;
+  const obliquity = 23.4392911 - 0.0130042 * T;
+
+  // Convert to radians for trig
+  const ramcRad = (ramc * Math.PI) / 180.0;
+  const oblRad = (obliquity * Math.PI) / 180.0;
+  const latRad = (lat * Math.PI) / 180.0;
+
+  // Ascendant formula
+  const ascRad = Math.atan2(
+    Math.cos(ramcRad),
+    -(Math.sin(ramcRad) * Math.cos(oblRad) + Math.tan(latRad) * Math.sin(oblRad))
+  );
+
+  // Convert to degrees and normalize to 0-360
+  let tropicalAscendant = ((ascRad * 180.0) / Math.PI + 360) % 360;
+
+  // Apply Lahiri Ayanamsha for sidereal
   const ayanamsha = calculateLahiriAyanamsha(jd);
-  
-  // Ascendant is usually the first item in the houses array or specifically returned
-  const siderealAscendant = (houseData.ascendant - ayanamsha + 360) % 360;
-  
+  const siderealAscendant = (tropicalAscendant - ayanamsha + 360) % 360;
+
   const signIndex = Math.floor(siderealAscendant / 30);
   const degreeInSign = siderealAscendant % 30;
-  
+
   return {
     longitude: siderealAscendant,
     signIndex,

@@ -1,16 +1,5 @@
-import { SwissEphemeris } from '@swisseph/browser';
-
-let sweInstance = null;
-
-export async function initEphemeris() {
-  if (sweInstance) return sweInstance;
-  
-  // Create instance and initialize
-  sweInstance = new SwissEphemeris();
-  await sweInstance.init();
-  
-  return sweInstance;
-}
+// astronomy-engine is loaded globally via CDN <script> tag in index.html
+// No WASM initialization needed — it's a pure JS library available as `window.Astronomy`
 
 export function calculateLahiriAyanamsha(jd) {
   const T = (jd - 2451545.0) / 36525.0;

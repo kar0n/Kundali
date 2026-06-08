@@ -8,9 +8,7 @@
     "build": "vite build",
     "preview": "vite preview"
   },
-  "dependencies": {
-    "@swisseph/browser": "^1.0.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "vite": "^5.0.0"
   }

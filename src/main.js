@@ -1,4 +1,4 @@
-import { initEphemeris, dateToJulianDay } from './astro/swisseph-init.js';
+import { dateToJulianDay } from './astro/swisseph-init.js';
 import { calculatePlanets } from './astro/planets.js';
 import { calculateAscendant, mapToHouses } from './astro/ascendant.js';
 import { generateD9Chart } from './astro/navamsha.js';
@@ -8,29 +8,11 @@ import { renderNavamshaChart } from './charts/navamsha-chart.js';
 import { renderPlanetTable } from './ui/planet-table.js';
 import { renderDashaTimeline } from './dasha/dasha-display.js';
 
-let swe = null;
-
-// ── Initialize ephemeris ──
-async function initializeApp() {
-  try {
-    swe = await initEphemeris();
-    console.log('Swiss Ephemeris loaded successfully');
-  } catch (err) {
-    console.error('Failed to load Swiss Ephemeris:', err);
-  }
-}
-
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initializeApp);
-} else {
-  initializeApp();
-}
-
 // ── Generate Kundali handler ──
 // Exposed as a global so the inline script's form handler can call it
 // even though this is a module (modules don't pollute the global scope).
 window.__generateKundali = async function () {
-  if (!swe) {
+  if (typeof Astronomy === 'undefined') {
     alert('Astrology engine is still loading. Please wait a moment and try again.');
     return;
   }
@@ -96,10 +78,10 @@ window.__generateKundali = async function () {
     const jd = dateToJulianDay(date, time, tz);
 
     // 2. Ascendant (Lagna)
-    const ascendant = calculateAscendant(swe, jd, lat, lng);
+    const ascendant = calculateAscendant(jd, lat, lng);
 
     // 3. Planets
-    let planets = calculatePlanets(swe, jd);
+    let planets = calculatePlanets(jd);
 
     // 4. Map to D1 Houses
     planets = mapToHouses(planets, ascendant.signIndex);
